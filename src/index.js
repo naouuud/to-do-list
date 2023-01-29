@@ -1,4 +1,15 @@
 import "./style.css";
-import { myItem } from "./object";
+import { collectFormData } from "./item-form";
+import { allItems } from "./arrays";
+import { createItem, pushItem } from "./item";
+import { renderProjects } from "./project-dom";
 
-console.log(myItem);
+document.querySelector("button[type=submit]").addEventListener("click", (e) => {
+    e.preventDefault();
+    const obj = collectFormData();
+    const newItem = createItem(obj);
+    pushItem(newItem);
+    console.log(allItems);
+});
+
+renderProjects();
