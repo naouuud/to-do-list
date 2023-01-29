@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +9,47 @@
     <script src="./main.js" defer></script>
     <!-- <script src="./../src/object.js"></script> -->
 </head>
+
 <body>
-    
+    <!-- main page -->
+    <h1>To-Do List</h1>
+    <div class="projects">
+        <div>Default Project</div>
+        <button id="new-project">Add Project</button>
+    </div>
+
+    <!-- item edit -->
+    <div class="item-edit-container">
+        <form class="item-edit-form" action="">
+            <div class="label-input-pair title">
+                <label for="title">Title</label>
+                <input type="text" id="title">
+            </div>
+            <div class="label-input-pair description">
+                <label for="description">Description</label>
+                <textarea id="description"></textarea>
+            </div>
+            <div class="label-input-pair project">
+                <label for="project">Project</label>
+                <select name="project" id="project">
+                </select>
+            </div>
+            <div class="label-input-pair priority">
+                <label for="priority">Priority</label>
+                <div>
+                    <input type="radio" name="priority" id="low" value="low"><label for="low">1</label><input
+                        type="radio" name="priority" id="medium" value="medium"><label for="medium">2</label><input
+                        type="radio" name="priority" id="high" value="high"><label for="high">3</label>
+                </div>
+            </div>
+            <div class="label-input-pair due">
+                <label for="due-date">Due date</label>
+                <input type="date" id="due-date">
+            </div>
+            <div class="submit"><button type="submit">Submit</button></div>
+        </form>
+    </div>
+
 </body>
+
 </html>
