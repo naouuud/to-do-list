@@ -1,15 +1,19 @@
 import "./style.css";
 import { collectFormData } from "./item-form";
-import { allItems } from "./arrays";
-import { createItem, pushItem } from "./item";
+import { allItems, allProjects } from "./arrays";
+import { createItem } from "./item";
+import { createProject, deleteProject } from "./project.js"
 import { renderProjects } from "./project-dom";
+
+window.createProject = createProject;
+window.deleteProject = deleteProject;
+window.allProjects = allProjects;
+window.createItem = createItem;
+window.allItems = allItems;
 
 document.querySelector("button[type=submit]").addEventListener("click", (e) => {
     e.preventDefault();
-    const obj = collectFormData();
-    const newItem = createItem(obj);
-    pushItem(newItem);
-    console.log(allItems);
+    createItem(collectFormData());
 });
 
 renderProjects();

@@ -1,7 +1,7 @@
 import { allItems } from "./arrays";
 
 export function createItem(obj) {
-    return {
+    const newItem = {
         title: obj.title,
         description: obj.description,
         due: obj.due,
@@ -10,8 +10,6 @@ export function createItem(obj) {
         project: obj.project,
         complete: false
     };
-}
-
-export function pushItem(obj) {
-    allItems.push(obj);
+    allItems.push(newItem);
+    return newItem;
 }
