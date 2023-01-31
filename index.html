@@ -19,7 +19,7 @@
     </div>
 
     <!-- itemedit -->
-    <div class="item-edit-container">
+    <div class="item-edit">
         <form class="item-edit-form" action="">
             <div class="label-input-pair title">
                 <label for="title">Title</label>
@@ -27,13 +27,7 @@
             </div>
             <div class="label-input-pair description">
                 <label for="description">Description</label>
-                <textarea id="description" placeholder="Add a description"></textarea>
-            </div>
-            <div class="label-input-pair project">
-                <label for="project">Project</label>
-                <select name="project" id="project">
-                    <option value="" disabled selected>Assign to project</option>
-                </select>
+                <textarea id="description" placeholder="Add a description" maxlength="300"></textarea>
             </div>
             <div class="label-input-pair priority">
                 <label for="priority">Priority</label>
@@ -44,6 +38,12 @@
             <div class="label-input-pair due">
                 <label for="due-date">Due date</label>
                 <input type="date" id="due-date">
+            </div>
+            <div class="label-input-pair project">
+                <label for="project">Project</label>
+                <select name="project" id="project">
+                    <option value="" disabled selected>Assign to project</option>
+                </select>
             </div>
             <div class="submit"><button type="submit">Submit</button></div>
         </form>
