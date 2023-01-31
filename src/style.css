@@ -63,7 +63,7 @@ body {
     border: 2px dashed black;
 }
 
-div.item-edit-container {
+div.item-edit {
     height: 100vh;
     width: 100vw;
     border: 2px solid darkgreen;
@@ -72,13 +72,11 @@ div.item-edit-container {
     align-items: center;
 }
 
-form.item-edit-form {
-    width: 40vw;
+.item-edit-form {
     border: 2px solid black;
-    /* box-shadow: 1px 1px 10px black; */
     border-radius: 5px;
     display: grid;
-    grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+    grid-template: 1fr 1fr 1fr 1fr / 2fr 1fr;
     grid-auto-flow: column;
     row-gap: 20px;
     column-gap: 60px;
@@ -90,15 +88,13 @@ form.item-edit-form {
     padding-bottom: 5px;
 }
 
-div.label-input-pair {
+.label-input-pair {
     display: grid;
     grid-template-rows: auto 1fr;
 }
 
-div.title,
-div.description,
-div.project {
-    grid-column: 1 / 3;
+.description {
+    grid-row: 2 / 5;
 }
 
 .due input {
@@ -116,12 +112,13 @@ div.project {
     border-radius: 2px;
     font-family: serif;
     font-size: 16px;
+    resize: none;
 }
 
 .submit button {
     width: 100%;
-    height: 65%;
-    margin-top: 22px;
+    height: 70%;
+    margin-top: 12px;
     box-shadow: black 1px 1px;
 }
 
