@@ -3,7 +3,7 @@ import { collectFormData } from "./item-form";
 import { allItems, allProjects } from "./arrays";
 import { createItem } from "./item";
 import { createProject, deleteProject } from "./project.js"
-import { renderProjects } from "./project-dom";
+import { renderProjects } from "./homepage-dom";
 
 window.createProject = createProject;
 window.deleteProject = deleteProject;

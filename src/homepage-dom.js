@@ -8,15 +8,27 @@ export function renderProjects() {
         const newProject = document.createElement('div');
         newProject.classList.add("project");
         newProject.setAttribute("index", allProjects.indexOf(project));
-        newProject.textContent = `${project.name}`;
         document.querySelector(".projects").appendChild(newProject);
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
+        const header = document.createElement("div");
+        header.classList.add("project-header");
+        newProject.appendChild(header);
+        const body = document.createElement("div");
+        body.classList.add("project-body");
+        body.textContent = "The lazy brown fox jumped over the dog";
+        newProject.appendChild(body);
+        const name = document.createElement("span");
+        name.textContent = `${project.name}`;
+        header.appendChild(name);
+        const deleteButton = document.createElement("div");
         deleteButton.addEventListener("click", () => {
             deleteProject(newProject.getAttribute("index"));
             renderProjects();
         });
-        newProject.appendChild(deleteButton);
+        header.appendChild(deleteButton);
+        const deleteIcon = document.createElement("img");
+        deleteIcon.setAttribute("src", "../src/images/delete-icon.svg");
+        deleteIcon.setAttribute("alt", "garbage icon");
+        deleteButton.appendChild(deleteIcon);
     })
     recreateAddButton();
     document.querySelector("div#new-project").addEventListener("click", () => {
@@ -30,7 +42,7 @@ function recreateAddButton() {
     const createNew = document.createElement("div");
     createNew.id = "new-project";
     createNew.classList.add("project");
-    createNew.textContent = "New Project...";
+    createNew.textContent = "+ New Project";
     document.querySelector(".projects").appendChild(createNew);
 }
 
