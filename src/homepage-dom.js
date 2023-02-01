@@ -1,34 +1,21 @@
 import { allProjects } from "./arrays";
 import { createProject, displayProjects, deleteProject } from "./project";
+import { newElement } from "./dom-creation";
 
 export function renderProjects() {
     // document.querySelector(".projects").innerHTML = `<div class="project" id="all-projects">All Projects</div>`;
     document.querySelector(".projects").innerHTML = "";
     allProjects.forEach(project => {
-        const newProject = document.createElement('div');
-        newProject.classList.add("project");
-        newProject.setAttribute("index", allProjects.indexOf(project));
-        document.querySelector(".projects").appendChild(newProject);
-        const header = document.createElement("div");
-        header.classList.add("project-header");
-        newProject.appendChild(header);
-        const body = document.createElement("div");
-        body.classList.add("project-body");
-        body.textContent = "The lazy brown fox jumped over the dog";
-        newProject.appendChild(body);
-        const name = document.createElement("span");
-        name.textContent = `${project.name}`;
-        header.appendChild(name);
-        const deleteButton = document.createElement("div");
+        const newProject = newElement({ type: "div", class: "project", index: allProjects.indexOf(project), parentS: ".projects" });
+        const header = newElement({ type: "div", class: "project-header", parentV: newProject });
+        const body = newElement({ type: "div", class: "project-body", text: "The lazy brown dog jumped over the fox", parentV: newProject });
+        const name = newElement({ type: "span", text: `${project.name}`, parentV: header });
+        const deleteButton = newElement({ type: "div", parentV: header });
         deleteButton.addEventListener("click", () => {
             deleteProject(newProject.getAttribute("index"));
             renderProjects();
         });
-        header.appendChild(deleteButton);
-        const deleteIcon = document.createElement("img");
-        deleteIcon.setAttribute("src", "../src/images/delete-icon.svg");
-        deleteIcon.setAttribute("alt", "garbage icon");
-        deleteButton.appendChild(deleteIcon);
+        const deleteIcon = newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parentV: deleteButton });
     })
     recreateAddButton();
     document.querySelector("div#new-project").addEventListener("click", () => {
@@ -39,11 +26,7 @@ export function renderProjects() {
 }
 
 function recreateAddButton() {
-    const createNew = document.createElement("div");
-    createNew.id = "new-project";
-    createNew.classList.add("project");
-    createNew.textContent = "+ New Project";
-    document.querySelector(".projects").appendChild(createNew);
+    const createNew = newElement({ type: "div", id: "new-project", class: "project", text: "+ New Project", parentS: ".projects" });
 }
 
 // load new/edit window
