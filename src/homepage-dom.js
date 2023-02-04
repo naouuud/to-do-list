@@ -1,32 +1,29 @@
 import { allProjects } from "./arrays";
 import { createProject, displayProjects, deleteProject } from "./project";
 import { newElement } from "./dom-creation";
+import { renderItems } from "./project-dom";
 
-export function renderProjects() {
-    // document.querySelector(".projects").innerHTML = `<div class="project" id="all-projects">All Projects</div>`;
+export function renderHome() {
     document.querySelector(".projects").innerHTML = "";
     allProjects.forEach(project => {
-        const newProject = newElement({ type: "div", class: "project", index: allProjects.indexOf(project), parentS: ".projects" });
-        const header = newElement({ type: "div", class: "project-header", parentV: newProject });
-        const body = newElement({ type: "div", class: "project-body", text: "The lazy brown dog jumped over the fox", parentV: newProject });
-        const name = newElement({ type: "span", text: `${project.name}`, parentV: header });
-        const deleteButton = newElement({ type: "div", parentV: header });
+        const newProject = newElement({ type: "div", id: `${project.name.toLowerCase()}`, className: "project", parent: ".projects" });
+        newProject.setAttribute("index", allProjects.indexOf(project));
+        const header = newElement({ type: "div", className: "project-header", parent: newProject });
+        const name = newElement({ type: "span", textContent: `${project.name}`, parent: header });
+        const deleteButton = newElement({ type: "div", parent: header });
         deleteButton.addEventListener("click", () => {
             deleteProject(newProject.getAttribute("index"));
-            renderProjects();
+            renderHome();
         });
-        const deleteIcon = newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parentV: deleteButton });
+        const deleteIcon = newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parent: deleteButton });
+        const body = newElement({ type: "div", className: "project-body", parent: newProject });
+        const list = newElement({ type: "ul", className: "item-list", parent: body });
     })
-    recreateAddButton();
+    newElement({ type: "div", id: "new-project", className: "project", textContent: "+ New Project", parent: ".projects" });
+    displayProjects();
+    renderItems();
     document.querySelector("div#new-project").addEventListener("click", () => {
-        createProject();
-        displayProjects();
-        renderProjects();
+        createProject(prompt("Choose a name for your project:", "Untitled"));
+        renderHome();
     });
 }
-
-function recreateAddButton() {
-    const createNew = newElement({ type: "div", id: "new-project", class: "project", text: "+ New Project", parentS: ".projects" });
-}
-
-// load new/edit window

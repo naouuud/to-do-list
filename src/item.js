@@ -7,7 +7,7 @@ export function createItem(obj) {
         due: obj.due,
         priority: obj.priority,
         complete: obj.complete,
-        project: obj.project,
+        project: obj.project.toLowerCase(),
         complete: false
     };
     allItems.push(newItem);

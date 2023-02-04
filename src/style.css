@@ -135,3 +135,14 @@ div.item-edit {
 .label-input-pair select:focus-visible {
     outline: -webkit-focus-ring-color auto 1px;
 }
+
+.project .project-header {
+    font-weight: 600;
+}
+
+.project .project-body .item-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    font-size: .95em;
+}
