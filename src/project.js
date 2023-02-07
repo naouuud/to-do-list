@@ -1,4 +1,4 @@
-import { allProjects } from "./arrays";
+import { allItems, allProjects } from "./arrays";
 
 export function createProject(name) {
     if (name != null) {
@@ -8,8 +8,11 @@ export function createProject(name) {
 }
 
 export function deleteProject(n) {
+    const projectName = allProjects[n].name.toLowerCase();
+    const index = allItems.findIndex(item => item.project == projectName);
+    allItems.splice(index, 1);
     allProjects.splice(n, 1);
-} 
+}
 
 export function displayProjects() {
     document.querySelector("select#project").innerHTML = "";

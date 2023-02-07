@@ -1,12 +1,12 @@
 import { allProjects } from "./arrays";
 import { createProject, displayProjects, deleteProject } from "./project";
 import { newElement } from "./dom-creation";
-import { renderItems } from "./project-dom";
+import { renderItems } from "./item-dom";
 
 export function renderHome() {
     document.querySelector(".projects").innerHTML = "";
     allProjects.forEach(project => {
-        const newProject = newElement({ type: "div", id: `${project.name.toLowerCase()}`, className: "project", parent: ".projects" });
+        const newProject = newElement({ type: "div", id: `${project.name}`, className: "project", parent: ".projects" });
         newProject.setAttribute("index", allProjects.indexOf(project));
         const header = newElement({ type: "div", className: "project-header", parent: newProject });
         const name = newElement({ type: "span", textContent: `${project.name}`, parent: header });
