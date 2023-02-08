@@ -8,9 +8,16 @@ export function createProject(name) {
 }
 
 export function deleteProject(n) {
-    const projectName = allProjects[n].name.toLowerCase();
-    const index = allItems.findIndex(item => item.project == projectName);
-    allItems.splice(index, 1);
+    const projectName = allProjects[n].name;
+    function deleteLoop() {
+        for (let i = 0; i < allItems.length; i++) {
+            if (allItems[i].project == projectName) {
+                allItems.splice(i, 1);
+                deleteLoop()
+            }
+        }
+    }
+    deleteLoop();
     allProjects.splice(n, 1);
 }
 

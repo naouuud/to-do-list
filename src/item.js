@@ -13,3 +13,8 @@ export function createItem(obj) {
     allItems.push(newItem);
     return newItem;
 }
+
+export function deleteItem(title) {
+    const index = allItems.findIndex(item => item.title == title);
+    allItems.splice(index, 1);
+}
