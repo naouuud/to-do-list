@@ -55,7 +55,27 @@ body {
 }
 
 .project-body {
-    padding: 25px;
+    padding: 25px 0 0 10px;
+}
+
+.project-body .item-list li {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    margin-bottom: 10px;
+    justify-content: left;
+}
+
+.project-body .item-list li img {
+    width: 20px;
+}
+
+.project-body .item-list li img:first-child {
+    margin-right: 5px;
+}
+
+.project-body .item-list li img:last-child {
+    justify-self: end;
 }
 
 .homepage .project#new-project {
