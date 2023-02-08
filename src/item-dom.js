@@ -9,12 +9,32 @@ export function renderItems() {
     })
     allItems.forEach(item => {
         const li = newElement({ type: "li", parent: `#${item.project} .project-body .item-list` });
-        const imgCheck = newElement({ type: "img", class: "item-check-icon unchecked", parent: li, src: "./../src/images/checkbox-blank-outline.svg", alt: "Item check icon (unchecked)" })
+        li.setAttribute("index", allItems.indexOf(item));
+        const imgCheck = newElement({ type: "img", parent: li });
+        imgCheck.addEventListener("click", () => {
+            if (!item.complete) item.complete = true;
+            else item.complete = false;
+            renderCheckbox(item);
+        })
         const span = newElement({ type: "span", textContent: item.title, parent: li });
-        const imgDelete = newElement({ type: "img", class: "item-delete-icon", parent: li, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
+        const imgDelete = newElement({ type: "img", className: "item-delete-icon", parent: li, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
         imgDelete.addEventListener("click", () => {
             deleteItem(item.title);
             renderHome();
         });
+        renderCheckbox(item);
     });
+}
+
+function renderCheckbox(item) {
+    const element = document.querySelector(`.project-body .item-list li[index="${allItems.indexOf(item)}"] img`);
+    if (!item.complete) {
+        element.className = "unchecked";
+        element.src = "./../src/images/checkbox-blank-outline.svg";
+        element.alt = "Unmarked checkbox";
+    } else {
+        element.className = "checked";
+        element.src = "./../src/images/checkbox-outline.svg"
+        element.alt = "Marked checkbox";
+    }
 }
