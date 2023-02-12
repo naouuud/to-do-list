@@ -16,7 +16,7 @@ export function renderItems() {
             else item.complete = false;
             renderCheckbox(item);
         })
-        const span = newElement({ type: "span", textContent: item.title, parent: li });
+        newElement({ type: "span", textContent: item.title, parent: li });
         const imgDelete = newElement({ type: "img", className: "item-delete-icon", parent: li, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
         imgDelete.addEventListener("click", () => {
             deleteItem(item.title);
@@ -24,6 +24,7 @@ export function renderItems() {
         });
         renderCheckbox(item);
     });
+    renderNewItem();
 }
 
 function renderCheckbox(item) {
@@ -37,4 +38,10 @@ function renderCheckbox(item) {
         element.src = "./../src/images/checkbox-outline.svg"
         element.alt = "Marked checkbox";
     }
+}
+
+function renderNewItem() {
+    document.querySelectorAll(".project-body .item-list").forEach(project => {
+        newElement({type: "li", className: "new-item", textContent: "+ New Item", parent: project});
+    });
 }

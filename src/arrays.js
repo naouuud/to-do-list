@@ -1,2 +1,2 @@
-export let allItems = [];
+export const allItems = [];
 export const allProjects = [];

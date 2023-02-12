@@ -18,14 +18,13 @@ body {
 }
 
 .projects-flex {
+    width: 100vw;
     padding: 150px 0;
-    /* border: 1px solid blue; */
     display: flex;
     justify-content: center;
 }
 
 .projects {
-    /* border: 1px solid magenta; */
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(2, 350px);

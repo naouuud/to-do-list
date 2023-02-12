@@ -1,25 +1,13 @@
 import "./style.css";
-import { newElement } from "./dom-creation.js";
-import { collectFormData } from "./item-form.js";
 import { allItems, allProjects } from "./arrays.js";
 import { createItem } from "./item.js";
-import { createProject, deleteProject } from "./project.js"
+import { createProject } from "./project.js"
 import { renderHome } from "./homepage-dom.js";
-import { renderItems } from "./item-dom.js"
 
-window.newElement = newElement;
 window.createProject = createProject;
-window.deleteProject = deleteProject;
-window.allProjects = allProjects;
 window.createItem = createItem;
+window.allProjects = allProjects;
 window.allItems = allItems;
-
-// move to item dom module
-document.querySelector("button[type=submit]").addEventListener("click", (e) => {
-    e.preventDefault();
-    createItem(collectFormData());
-    renderItems();
-});
 
 createProject("Adventure");
 createProject("RPG");
@@ -32,5 +20,3 @@ createItem({ title: "Dwarf Fortress", description: "Wrap you head around this", 
 createItem({ title: "The Binding of Isaac", description: "Defeat mom", due: "2023-08-31", priority: "2", complete: false, project: "Roguelite" });
 
 renderHome();
-
-// document.querySelector(".header").appendChild(newElement({type: "div", text: "Hello World!"}));
