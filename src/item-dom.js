@@ -2,6 +2,7 @@ import { allItems, allProjects } from "./arrays";
 import { newElement } from "./dom-creation";
 import { renderHome } from "./homepage-dom";
 import { deleteItem } from "./item";
+import { renderEditWindow } from "./edit-dom";
 
 export function renderItems() {
     allProjects.forEach(project => {
@@ -42,6 +43,7 @@ function renderCheckbox(item) {
 
 function renderNewItem() {
     document.querySelectorAll(".project-body .item-list").forEach(project => {
-        newElement({type: "li", className: "new-item", textContent: "+ New Item", parent: project});
+        const newItem = newElement({type: "li", className: "new-item", textContent: "+ New Item", parent: project});
+        newItem.addEventListener("click", renderEditWindow);
     });
 }

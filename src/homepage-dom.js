@@ -2,7 +2,7 @@ import { allProjects } from "./arrays";
 import { createProject, displayProjects, deleteProject } from "./project";
 import { newElement } from "./dom-creation";
 import { renderItems } from "./item-dom";
-import { renderEditWindow } from "./new-edit-dom";
+import { renderEditWindow } from "./edit-dom";
 
 export function renderHome() {
     const homePage = document.querySelector(".homepage");
@@ -30,6 +30,5 @@ export function renderHome() {
         createProject(prompt("Choose a name for your project:", "Untitled"));
         renderHome();
     });
-    document.querySelector(".item-edit").innerHTML = "";
-    renderEditWindow();
+
 }

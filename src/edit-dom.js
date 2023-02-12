@@ -2,9 +2,14 @@ import { newElement } from "./dom-creation";
 import { collectFormData } from "./item-form";
 import { renderItems } from "./item-dom";
 import { displayProjects } from "./project";
+import { renderHome } from "./homepage-dom";
 
 export function renderEditWindow() {
-    const form = newElement({ type: "form", className: "item-edit-form", parent: ".item-edit" });
+    const homePage = document.querySelector(".homepage");
+    homePage.innerHTML = "";
+    newElement({type: "div", class: "header", text: "My To Do List", parent: homePage});
+    const itemEdit = newElement({type: 'div', class: 'item-edit', parent: homePage})
+    const form = newElement({ type: "form", className: "item-edit-form", parent: itemEdit });
     const title = newElement({ type: 'div', className: 'label-input-pair title', parent: form });
     newElement({ type: "label", textContent: "Title", for: 'title', parent: title });
     const titleInput = newElement({ type: 'input', id: 'title', placeholder: "Choose a title", parent: title });
@@ -20,10 +25,9 @@ export function renderEditWindow() {
     newElement({ type: 'label', for: "due-date", text: "Due date", parent: due });
     const dueCalendar = newElement({ type: 'input', id: 'due-date', parent: due });
     dueCalendar.setAttribute('type', 'date');
-    const project = newElement({ type: 'div', class: 'label-input-pair project', parent: form });
+    const project = newElement({ type: 'div', class: 'label-input-pair project-edit', parent: form });
     newElement({ type: 'label', text: 'Project', for: 'project', parent: project });
-    const projectSelect = newElement({ type: 'select', name: 'project', id: 'project', parent: project });
-    const assignProject = newElement({ type: 'option', value: "", parent: projectSelect });
+    newElement({ type: 'select', name: 'project', id: 'project', parent: project });
     displayProjects();
     const submit = newElement({ type: 'div', class: 'submit', parent: form });
     const submitButton = newElement({ type: 'button', text: 'Submit', parent: submit });
@@ -31,6 +35,6 @@ export function renderEditWindow() {
     submitButton.addEventListener("click", (e) => {
         e.preventDefault();
         createItem(collectFormData());
-        renderItems();
+        renderHome();
     });
 }

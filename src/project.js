@@ -1,4 +1,5 @@
 import { allItems, allProjects } from "./arrays";
+import { newElement } from "./dom-creation";
 
 export function createProject(name) {
     if (name != null) {
@@ -24,9 +25,6 @@ export function deleteProject(n) {
 export function displayProjects() {
     document.querySelector("select#project").innerHTML = "";
     allProjects.forEach(obj => {
-        const option = document.createElement("option");
-        option.value = obj.name;
-        option.textContent = obj.name;
-        document.querySelector("select#project").appendChild(option);
+        newElement({type: 'option', text: obj.name, value: obj.name, parent: "select#project"});
     })
 }
