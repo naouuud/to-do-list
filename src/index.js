@@ -2,7 +2,7 @@ import "./style.css";
 import { allItems, allProjects } from "./arrays.js";
 import { createItem } from "./item.js";
 import { createProject } from "./project.js"
-import { renderHome } from "./homepage-dom.js";
+import { renderProjects } from "./projects-dom.js";
 
 window.createProject = createProject;
 window.createItem = createItem;
@@ -19,4 +19,4 @@ createItem({ title: "Dark Souls 3", description: "Fight your worst fears", due: 
 createItem({ title: "Dwarf Fortress", description: "Wrap you head around this", due: "2024-02-07", priority: "1", complete: false, project: "Roguelite" });
 createItem({ title: "The Binding of Isaac", description: "Defeat mom", due: "2023-08-31", priority: "2", complete: false, project: "Roguelite" });
 
-renderHome();
+renderProjects();

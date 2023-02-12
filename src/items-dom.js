@@ -1,6 +1,6 @@
 import { allItems, allProjects } from "./arrays";
 import { newElement } from "./dom-creation";
-import { renderHome } from "./homepage-dom";
+import { renderProjects } from "./projects-dom";
 import { deleteItem } from "./item";
 import { renderEditWindow } from "./edit-dom";
 
@@ -21,7 +21,7 @@ export function renderItems() {
         const imgDelete = newElement({ type: "img", className: "item-delete-icon", parent: li, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
         imgDelete.addEventListener("click", () => {
             deleteItem(item.title);
-            renderHome();
+            renderProjects();
         });
         renderCheckbox(item);
     });

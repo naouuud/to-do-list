@@ -1,10 +1,9 @@
 import { allProjects } from "./arrays";
-import { createProject, displayProjects, deleteProject } from "./project";
+import { createProject, deleteProject } from "./project";
 import { newElement } from "./dom-creation";
-import { renderItems } from "./item-dom";
-import { renderEditWindow } from "./edit-dom";
+import { renderItems } from "./items-dom";
 
-export function renderHome() {
+export function renderProjects() {
     const homePage = document.querySelector(".homepage");
     homePage.innerHTML = "";
     newElement({type: "div", class: "header", text: "My To Do List", parent: homePage});
@@ -18,7 +17,7 @@ export function renderHome() {
         const deleteButton = newElement({ type: "div", parent: header });
         deleteButton.addEventListener("click", () => {
             deleteProject(newProject.getAttribute("index"));
-            renderHome();
+            renderProjects();
         });
         newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parent: deleteButton });
         const body = newElement({ type: "div", className: "project-body", parent: newProject });
@@ -28,7 +27,7 @@ export function renderHome() {
     renderItems();
     document.querySelector("div#new-project").addEventListener("click", () => {
         createProject(prompt("Choose a name for your project:", "Untitled"));
-        renderHome();
+        renderProjects();
     });
 
 }

@@ -1,8 +1,7 @@
 import { newElement } from "./dom-creation";
 import { collectFormData } from "./item-form";
-import { renderItems } from "./item-dom";
 import { displayProjects } from "./project";
-import { renderHome } from "./homepage-dom";
+import { renderProjects } from "./projects-dom";
 
 export function renderEditWindow() {
     const homePage = document.querySelector(".homepage");
@@ -17,6 +16,9 @@ export function renderEditWindow() {
     const description = newElement({ type: 'div', className: 'label-input-pair description', parent: form });
     newElement({ type: 'label', for: 'description', text: 'Description', parent: description });
     newElement({ type: "textarea", id: 'description', placeholder: 'Add a description', maxlength: '300', parent: description });
+    const cancel = newElement({type: 'div', class: 'item-cancel', parent: form});
+    const cancelIcon = newElement({type: 'img', src: './../src/images/close-circle-outline.svg', alt: 'Close icon', parent: cancel});
+    cancelIcon.addEventListener("click", renderProjects);
     const priority = newElement({ type: 'div', class: 'label-input-pair priority', parent: form });
     newElement({ type: 'label', text: 'Priority', for: 'priority', parent: priority });
     const prioritySlider = newElement({ type: 'input', min: '1', max: '3', value: '2', class: 'slider', id: 'priority', parent: priority });
@@ -35,6 +37,6 @@ export function renderEditWindow() {
     submitButton.addEventListener("click", (e) => {
         e.preventDefault();
         createItem(collectFormData());
-        renderHome();
+        renderProjects();
     });
 }
