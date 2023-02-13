@@ -13,8 +13,8 @@ export function renderItems() {
         li.setAttribute("index", allItems.indexOf(item));
         const imgCheck = newElement({ type: "img", parent: li });
         imgCheck.addEventListener("click", () => checkItem(item));
-        let shortTitle = item.title.substring(0, 22);
-        if (shortTitle.length >= 22) shortTitle += "...";
+        let shortTitle = item.title.substring(0, 35);
+        if (shortTitle.length >= 35) shortTitle += "...";
         const textSpan = newElement({ type: "span", textContent: shortTitle, parent: li });
         textSpan.addEventListener("click", () => checkItem(item));
         const imageSpan = newElement({ type: "span", parent: li });
@@ -22,7 +22,7 @@ export function renderItems() {
         imgEdit.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
         const imgDelete = newElement({ type: "img", className: "item-delete-icon", parent: imageSpan, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
         imgDelete.addEventListener("click", () => {
-            deleteItem(item.title);
+            deleteItem(allItems.indexOf(item));
             renderProjects();
         });
         renderCheckbox(item);

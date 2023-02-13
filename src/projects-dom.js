@@ -7,8 +7,7 @@ export function renderProjects() {
     const homePage = document.querySelector(".homepage");
     homePage.innerHTML = "";
     newElement({type: "div", class: "header", text: "My To Do List", parent: homePage});
-    const projectsFlex = newElement({type: "div", class: "projects-flex", parent: homePage});
-    newElement({type: 'div', class: 'projects', parent: projectsFlex});
+    newElement({type: "div", class: "projects", parent: homePage});
     allProjects.forEach(project => {
         const newProject = newElement({ type: "div", id: `${project.name}`, className: "project", parent: ".projects" });
         newProject.setAttribute("index", allProjects.indexOf(project));

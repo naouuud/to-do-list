@@ -12,8 +12,7 @@ export function createItem(obj) {
     allItems.push(newItem);
 }
 
-export function deleteItem(title) {
-    const index = allItems.findIndex(item => item.title == title);
+export function deleteItem(index) {
     allItems.splice(index, 1);
 }
 

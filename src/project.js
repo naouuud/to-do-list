@@ -4,6 +4,10 @@ import { newElement } from "./dom-creation";
 export function createProject(name) {
     if (name != null) {
         const newProject = { name };
+        if (allProjects.some(project => project.name == newProject.name)) {
+            alert("Project already exists. Please pick a new name.");
+            return
+        }
         allProjects.push(newProject);
     }
 }
@@ -25,6 +29,6 @@ export function deleteProject(n) {
 export function displayProjects() {
     document.querySelector("select#project").innerHTML = "";
     allProjects.forEach(obj => {
-        newElement({type: 'option', text: obj.name, value: obj.name, parent: "select#project"});
+        newElement({ type: 'option', text: obj.name, value: obj.name, parent: "select#project" });
     })
 }
