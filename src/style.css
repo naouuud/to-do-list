@@ -6,19 +6,25 @@ body {
     margin: 0;
 }
 
+.homepage {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
+}
+
 .header {
     font-size: 32px;
-    /* border: 1px solid black; */
-    width: 100%;
+    width: auto;
     text-align: left;
     padding: 10px;
-    padding-left: 10vw;
+    margin-right: 530px;
     position: fixed;
     top: 0;
 }
 
 .projects-flex {
-    width: 100vw;
+    width: auto;
     padding: 150px 0;
     display: flex;
     justify-content: center;
@@ -73,7 +79,7 @@ body {
     margin-right: 5px;
 }
 
-.project-body .item-list li img:last-child {
+.project-body .item-list li span:last-child {
     justify-self: end;
 }
 
@@ -180,4 +186,5 @@ body {
 
 .item-list .new-item {
     color: rgb(100, 100, 100);
+    margin-top: 20px;
 }
