@@ -2,7 +2,7 @@ import { allItems, allProjects } from "./arrays";
 import { newElement } from "./dom-creation";
 import { renderProjects } from "./projects-dom";
 import { deleteItem } from "./item";
-import { renderEditWindow } from "./edit-dom";
+import { renderNewWindow, renderEditWindow } from "./edit-dom";
 
 export function renderItems() {
     allProjects.forEach(project => {
@@ -17,7 +17,8 @@ export function renderItems() {
             else item.complete = false;
             renderCheckbox(item);
         })
-        newElement({ type: "span", textContent: item.title, parent: li });
+        const span = newElement({ type: "span", textContent: item.title, parent: li });
+        span.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
         const imgDelete = newElement({ type: "img", className: "item-delete-icon", parent: li, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
         imgDelete.addEventListener("click", () => {
             deleteItem(item.title);
@@ -42,8 +43,13 @@ function renderCheckbox(item) {
 }
 
 function renderNewItem() {
-    document.querySelectorAll(".project-body .item-list").forEach(project => {
-        const newItem = newElement({type: "li", className: "new-item", textContent: "+ New Item", parent: project});
-        newItem.addEventListener("click", renderEditWindow);
+    const projects = document.querySelectorAll(".project");
+    projects.forEach(proj => {
+        const body = proj.lastElementChild;
+        if (body) {
+            const list = body.lastElementChild;
+            const newItem = newElement({ type: "li", className: "new-item", textContent: "+ New Item", parent: list });
+            newItem.addEventListener("click", () => renderNewWindow(proj));
+        }
     });
 }
