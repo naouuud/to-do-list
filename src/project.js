@@ -32,3 +32,15 @@ export function displayProjects() {
         newElement({ type: 'option', text: obj.name, value: obj.name, parent: "select#project" });
     })
 }
+
+export function moveUp(index) {
+    if (index == 0) return;
+    allProjects.splice(index - 1, 0, allProjects[index]);
+    allProjects.splice(index + 1, 1);
+}
+
+export function moveDown(index) {
+    if (index == allProjects.length - 1) return;
+    allProjects.splice(index + 2, 0, allProjects[index]);
+    allProjects.splice(index, 1);
+}

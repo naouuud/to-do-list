@@ -19,7 +19,7 @@ export function renderItems() {
         let shortTitle = item.title.substring(0, 35);
         if (shortTitle.length >= 35) shortTitle += "...";
         const title = newElement({ type: "span", textContent: shortTitle, parent: left });
-        title.addEventListener("click", () => checkItem(item));
+        title.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
         const priority = newElement({type: "img", parent: right});
         priority.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
         renderPriority(item);

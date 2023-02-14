@@ -12,8 +12,8 @@ export function renderNewWindow(proj) {
     const itemEdit = newElement({ type: 'div', class: 'item-edit', parent: homePage })
     const form = newElement({ type: "form", className: "item-edit-form", parent: itemEdit });
     const title = newElement({ type: 'div', className: 'label-input-pair title', parent: form });
-    newElement({ type: "label", textContent: "Title", for: 'title', parent: title });
-    const titleInput = newElement({ type: 'input', id: 'title', placeholder: "Choose a title", maxlength: "50", parent: title });
+    newElement({ type: "label", textContent: "Name", for: 'title', parent: title });
+    const titleInput = newElement({ type: 'input', id: 'title', placeholder: "Choose a name", maxlength: "50", parent: title });
     titleInput.setAttribute("type", "text");
     const description = newElement({ type: 'div', className: 'label-input-pair description', parent: form });
     newElement({ type: 'label', for: 'description', text: 'Description', parent: description });
