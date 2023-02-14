@@ -58,19 +58,40 @@ body {
 }
 
 .project-body .item-list li {
-    width: 100%;
-    display: grid;
-    grid-template-columns: auto auto 1fr;
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
-    justify-content: left;
+}
+
+.flex-left {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: 15px;
+}
+
+.flex-right {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: center;
+    gap: 12px;
+}
+
+.flex-left:hover, .flex-right:hover {
+    cursor: pointer;
+}
+
+.flex-right span {
+    margin: 0 5px;
+    width: 60px;
+    text-align: center;
+    font-size: 0.9em;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .project-body .item-list li img {
     width: 20px;
-}
-
-.project-body .item-list li img:first-child {
-    margin-right: 15px;
 }
 
 .project-body .item-list li span:last-child {

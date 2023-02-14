@@ -27,9 +27,9 @@ export function renderNewWindow(proj) {
     const prioritySlider = newElement({ type: 'input', min: '1', max: '3', value: '2', class: 'slider', id: 'priority', parent: priorityBundle });
     prioritySlider.setAttribute('type', 'range');
     const sliderLabel = newElement({type: 'div', class: 'slider-label', parent: priorityBundle});
-    newElement({type: 'img', src: './../src/images/numeric-1-circle-outline.svg', alt: 'Number one', parent: sliderLabel});
-    newElement({type: 'img', src: './../src/images/numeric-2-circle-outline.svg', alt: 'Number two', parent: sliderLabel});
-    newElement({type: 'img', src: './../src/images/numeric-3-circle-outline.svg', alt: 'Number three', parent: sliderLabel});
+    newElement({type: 'img', src: './../src/images/sunny.png', alt: 'Number one', parent: sliderLabel});
+    newElement({type: 'img', src: './../src/images/rainy.png', alt: 'Number two', parent: sliderLabel});
+    newElement({type: 'img', src: './../src/images/flames.png', alt: 'Number three', parent: sliderLabel});
     const due = newElement({ type: 'div', class: 'label-input-pair due', parent: form });
     newElement({ type: 'label', for: "due-date", text: "Due date", parent: due });
     const dueCalendar = newElement({ type: 'input', id: 'due-date', parent: due });

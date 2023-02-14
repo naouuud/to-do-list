@@ -3,6 +3,7 @@ import { newElement } from "./dom-creation";
 import { renderProjects } from "./projects-dom";
 import { deleteItem } from "./item";
 import { renderNewWindow, renderEditWindow } from "./edit-dom";
+import format from "date-fns/format";
 
 export function renderItems() {
     allProjects.forEach(project => {
@@ -11,17 +12,24 @@ export function renderItems() {
     allItems.forEach(item => {
         const li = newElement({ type: "li", parent: `#${item.project} .project-body .item-list` });
         li.setAttribute("index", allItems.indexOf(item));
-        const imgCheck = newElement({ type: "img", parent: li });
-        imgCheck.addEventListener("click", () => checkItem(item));
+        const left = newElement({type: 'div', class: "flex-left", parent: li});
+        const right = newElement({type: 'div', class: 'flex-right', parent: li});
+        const checkbox = newElement({ type: "img", parent: left });
+        checkbox.addEventListener("click", () => checkItem(item));
         let shortTitle = item.title.substring(0, 35);
         if (shortTitle.length >= 35) shortTitle += "...";
-        const textSpan = newElement({ type: "span", textContent: shortTitle, parent: li });
-        textSpan.addEventListener("click", () => checkItem(item));
-        const imageSpan = newElement({ type: "span", parent: li });
-        const imgEdit = newElement({type: 'img', className: "item-edit-icon", parent: imageSpan, src: "./../src/images/progress-pencil.svg", alt: "Item edit icon"})
-        imgEdit.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
-        const imgDelete = newElement({ type: "img", className: "item-delete-icon", parent: imageSpan, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
-        imgDelete.addEventListener("click", () => {
+        const title = newElement({ type: "span", textContent: shortTitle, parent: left });
+        title.addEventListener("click", () => checkItem(item));
+        const priority = newElement({type: "img", parent: right});
+        priority.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
+        renderPriority(item);
+        const date = format(new Date(`${item.due}`), "MMM d");
+        const dateSpan = newElement({type: 'span', text: date, parent: right});
+        dateSpan.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
+        const editIcon = newElement({type: 'img', className: "item-edit-icon", parent: right, src: "./../src/images/progress-pencil.svg", alt: "Item edit icon"})
+        editIcon.addEventListener("click", () => renderEditWindow(allItems.indexOf(item)));
+        const deleteIcon = newElement({ type: "img", className: "item-delete-icon", parent: right, src: "./../src/images/delete-outline.svg", alt: "Item delete icon" })
+        deleteIcon.addEventListener("click", () => {
             deleteItem(allItems.indexOf(item));
             renderProjects();
         });
@@ -56,6 +64,20 @@ function strikeThrough(item) {
         element.style.textDecoration = "none";
     } else {
         element.style.textDecoration = "line-through";
+    }
+}
+
+function renderPriority(item) {
+    const element = document.querySelector(`.project-body .item-list li[index="${allItems.indexOf(item)}"] .flex-right img:first-child`);
+    if (item.priority == "1") {
+        element.src = "./../src/images/sunny.png";
+        element.alt = "Sunny icon";
+    } else if (item.priority == "2") {
+        element.src = "./../src/images/rainy.png";
+        element.alt = "Rainy icon";
+    } else if (item.priority == "3") {
+        element.src = "./../src/images/flames.png";
+        element.alt = "Flames icon";
     }
 }
 
