@@ -39,11 +39,11 @@ export function renderProjects() {
         const body = newElement({ type: "div", className: "project-body", parent: newProject });
         newElement({ type: "ul", className: "item-list", parent: body });
     })
-    newElement({ type: "div", id: "new-project", className: "project", textContent: "+ New Project", parent: ".projects" });
-    renderItems();
-    document.querySelector("div#new-project").addEventListener("click", () => {
+    const newProject = newElement({ type: "div", id: "new-project", className: "project", parent: ".projects" });
+    const newProjectText = newElement({ type: 'span', text: "+ New Project", parent: newProject });
+    newProjectText.addEventListener("click", () => {
         createProject(prompt("Choose a name for your project:", "Untitled"));
         renderProjects();
     });
-
+    renderItems();
 }

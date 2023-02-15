@@ -32,9 +32,6 @@ body {
 }
 
 .sidebar {
-    /* position: fixed;
-    top: 300px;
-    left: 140px; */
     margin: 200px 180px 0 100px;
     font-size: 20px;
 }
@@ -129,11 +126,15 @@ body {
 
 .flex-right span {
     margin: 0 5px;
-    width: 60px;
+    width: 80px;
     text-align: center;
     font-size: 0.9em;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.flex-right span.red {
+    color: red;
 }
 
 .project-body .item-list li img {
@@ -160,6 +161,10 @@ body {
     margin-top: 20px;
 }
 
+.item-list .new-item span:hover {
+    cursor: pointer;
+}
+
 .item-list .new-item:only-child {
     margin-top: 0;
 }
@@ -168,6 +173,10 @@ body {
     color: rgb(100, 100, 100);
     border: 2px dashed black;
     height: auto;
+}
+
+.homepage .project#new-project span:hover {
+    cursor: pointer;
 }
 
 .item-edit {
