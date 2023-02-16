@@ -3,7 +3,7 @@ import { newElement } from "./dom-creation";
 import { collectFormData } from "./item-form";
 import { displayProjects } from "./project";
 import { renderProjects } from "./projects-dom";
-import { editItem } from "./item";
+import { createItem, editItem } from "./item";
 
 export function renderNewWindow(proj) {
     const homePage = document.querySelector(".homepage");
@@ -38,7 +38,7 @@ export function renderNewWindow(proj) {
     newElement({ type: 'label', text: 'Project', for: 'project', parent: project });
     const projectName = newElement({ type: 'select', name: 'project', id: 'project', parent: project });
     displayProjects();
-    if (proj) projectName.value = proj.id;
+    if (proj) projectName.value = proj;
     const submit = newElement({ type: 'div', class: 'submit', parent: form });
     const submitButton = newElement({ type: 'button', text: 'Submit', parent: submit });
     submitButton.setAttribute('type', 'submit');

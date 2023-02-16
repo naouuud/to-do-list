@@ -1,4 +1,4 @@
-import { allItems, allProjects } from "./arrays";
+import { allItems, allProjects, storeItems, storeProjects, updateProjectsArray } from "./arrays";
 import { newElement } from "./dom-creation";
 
 export function createProject(name) {
@@ -9,10 +9,13 @@ export function createProject(name) {
         return
     }
     allProjects.push(newProject);
+    storeProjects();
 }
 
 export function deleteProject(n) {
     const projectName = allProjects[n].name;
+    allProjects.splice(n, 1);
+    storeProjects();
     function deleteLoop() {
         for (let i = 0; i < allItems.length; i++) {
             if (allItems[i].project == projectName) {
@@ -22,7 +25,7 @@ export function deleteProject(n) {
         }
     }
     deleteLoop();
-    allProjects.splice(n, 1);
+    storeItems();
 }
 
 export function displayProjects() {
@@ -36,10 +39,12 @@ export function moveUp(index) {
     if (index == 0) return;
     allProjects.splice(index - 1, 0, allProjects[index]);
     allProjects.splice(index + 1, 1);
+    storeProjects();
 }
 
 export function moveDown(index) {
     if (index == allProjects.length - 1) return;
     allProjects.splice(index + 2, 0, allProjects[index]);
     allProjects.splice(index, 1);
+    storeProjects();
 }

@@ -1,14 +1,15 @@
-import { allProjects } from "./arrays";
+import { allProjects, updateProjectsArray } from "./arrays";
 import { createProject, deleteProject, moveDown, moveUp } from "./project";
 import { newElement } from "./dom-creation";
 import { renderItems } from "./items-dom";
 
 export function renderProjects() {
+    updateProjectsArray();
     const homePage = document.querySelector(".homepage");
     homePage.innerHTML = "";
     newElement({ type: "div", class: "header", text: "My To Do List", parent: homePage });
     const container = newElement({ type: 'div', class: "projects-flex", parent: homePage });
-    const sidebar = newElement({ type: 'div', class: "sidebar", parent: container });
+    const sidebar = newElement({ type: 'div', class: "sidebar", parent: container});
     const list = newElement({ type: 'ul', class: 'project-list', parent: sidebar });
     allProjects.forEach(project => {
         const listItem = newElement({ type: 'li', parent: list });
@@ -45,7 +46,7 @@ export function renderProjects() {
     newProjectText.addEventListener("click", () => {
         newProject.innerHTML = "";
         const newProjectForm = newElement({ type: 'form', parent: newProject });
-        const newProjectInput = newElement({ type: 'input', parent: newProjectForm, placeholder: "Name your project", maxlength: "30" });
+        const newProjectInput = newElement({ type: 'input', parent: newProjectForm, maxlength: "22" });
         const newProjectButtons = newElement({type: 'div', parent: newProjectForm});
         const newProjectSubmit = newElement({ type: 'button', text: 'Confirm', parent: newProjectButtons });
         newProjectSubmit.addEventListener("click", e => {

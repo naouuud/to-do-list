@@ -1,7 +1,7 @@
-import { allItems, allProjects } from "./arrays";
+import { allItems, allProjects, updateItemsArray } from "./arrays";
 import { newElement } from "./dom-creation";
 import { renderProjects } from "./projects-dom";
-import { deleteItem } from "./item";
+import { deleteItem, checkItem } from "./item";
 import { renderNewWindow, renderEditWindow } from "./edit-dom";
 import { format, parseISO, isPast, isToday, isTomorrow } from "date-fns";
 
@@ -9,7 +9,8 @@ export function renderItems() {
     allProjects.forEach(project => {
         const projectID = project.name.replaceAll(" ", "-").toLowerCase();
         document.querySelector(`#a-${projectID} .project-body .item-list`).innerHTML = "";
-    })
+    });
+    updateItemsArray();
     allItems.forEach(item => {
         const projectID = item.project.replaceAll(" ", "-").toLowerCase();
         const li = newElement({ type: "li", parent: `#a-${projectID} .project-body .item-list` });
@@ -17,7 +18,11 @@ export function renderItems() {
         const left = newElement({ type: 'div', class: "flex-left", parent: li });
         const right = newElement({ type: 'div', class: 'flex-right', parent: li });
         const checkbox = newElement({ type: "img", parent: left });
-        checkbox.addEventListener("click", () => checkItem(item));
+        checkbox.addEventListener("click", () => {
+            checkItem(item);
+            renderCheckbox(item);
+            renderStrikeThrough(item);
+        });
         let shortTitle = item.title.substring(0, 35);
         if (shortTitle.length >= 35) shortTitle += "...";
         const title = newElement({ type: "span", textContent: shortTitle, parent: left });
@@ -45,31 +50,23 @@ export function renderItems() {
             renderProjects();
         });
         renderCheckbox(item);
+        renderStrikeThrough(item);
     });
     renderNewItem();
-}
-
-function checkItem(item) {
-    if (!item.complete) item.complete = true;
-    else item.complete = false;
-    renderCheckbox(item);
-    strikeThrough(item);
 }
 
 function renderCheckbox(item) {
     const element = document.querySelector(`.project-body .item-list li[index="${allItems.indexOf(item)}"] img`);
     if (!item.complete) {
-        element.className = "unchecked";
         element.src = "./../src/images/checkbox-blank-outline.svg";
         element.alt = "Unmarked checkbox";
     } else {
-        element.className = "checked";
         element.src = "./../src/images/checkbox-outline.svg"
         element.alt = "Marked checkbox";
     }
 }
 
-function strikeThrough(item) {
+function renderStrikeThrough(item) {
     const element = document.querySelector(`.project-body .item-list li[index="${allItems.indexOf(item)}"] span`);
     if (!item.complete) {
         element.style.textDecoration = "none";
@@ -95,12 +92,13 @@ function renderPriority(item) {
 function renderNewItem() {
     const projects = document.querySelectorAll(".project");
     projects.forEach(proj => {
-        const body = proj.lastElementChild;
-        if (body) {
-            const list = body.lastElementChild;
-            const newItem = newElement({ type: "li", className: "new-item", parent: list });
-            const newItemText = newElement({type: 'span', text: '+ New Item', parent: newItem});
-            newItemText.addEventListener("click", () => renderNewWindow(proj));
+        const span = proj.firstElementChild.firstElementChild;
+        if (span) {
+            if (proj.lastElementChild) {
+                const newItem = newElement({ type: "li", className: "new-item", parent: proj.lastElementChild.lastElementChild });
+                const newItemText = newElement({ type: 'span', text: '+ New Item', parent: newItem });
+                newItemText.addEventListener("click", () => renderNewWindow(span.textContent));
+            }
         }
     });
 }
