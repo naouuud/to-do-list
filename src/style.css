@@ -117,6 +117,10 @@ body {
     font-size: 18px;
 }
 
+#new-project form input:focus-visible {
+    outline: rgb(77, 77, 77) auto 1px;
+}
+
 .project-header div img {
     width: 20px;
     padding-top: 2px;
@@ -208,6 +212,7 @@ body {
     display: grid;
     justify-content: center;
     padding-top: 180px;
+    margin-bottom: 100px;
 }
 
 .item-edit-form {
@@ -263,7 +268,7 @@ body {
     border-style: none;
     padding: 4px 10px;
     border: 2px solid rgb(77, 77, 77);
-    border-radius: 2px;
+    border-radius: 5px;
     font-family: serif;
     font-size: 16px;
     resize: none;
@@ -298,4 +303,15 @@ body {
 .label-input-pair textarea:focus-visible,
 .label-input-pair select:focus-visible {
     outline: -webkit-focus-ring-color auto 1px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.footer a, .footer a:visited {
+    color: black;
+    text-decoration: underline;
 }
