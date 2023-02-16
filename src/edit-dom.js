@@ -43,6 +43,8 @@ export function renderNewWindow(proj) {
     const submitButton = newElement({ type: 'button', text: 'Submit', parent: submit });
     submitButton.setAttribute('type', 'submit');
     submitButton.addEventListener("click", submitNew);
+    const footer = newElement({ type: 'div', class: 'footer', parent: itemEdit });
+    footer.innerHTML = `<span>Icons by <a href="https://www.flaticon.com/authors/freepik" title="sun icons" target="_blank">Freepik</a> (sun), <a href="https://www.flaticon.com/authors/smalllikeart" title="rain icons" target="_blank">smalllikeart</a> (rain) and <a href="https://www.flaticon.com/authors/flat-icons" title="flames icons" target="_blank">Flat Icons</a> (flames). Source: <a href="https://www.flaticon.com" target="_blank">Flaticon.com</a>.</span>`;
     return { titleInput, descriptionInput, prioritySlider, dueCalendar, projectName, submitButton};
 }
 

@@ -8,8 +8,8 @@ export function renderProjects() {
     const homePage = document.querySelector(".homepage");
     homePage.innerHTML = "";
     newElement({ type: "div", class: "header", text: "My To Do List", parent: homePage });
-    const container = newElement({ type: 'div', class: "projects-flex", parent: homePage });
-    const sidebar = newElement({ type: 'div', class: "sidebar", parent: container});
+    const projectsFlex = newElement({ type: 'div', class: "projects-flex", parent: homePage });
+    const sidebar = newElement({ type: 'div', class: "sidebar", parent: projectsFlex });
     const list = newElement({ type: 'ul', class: 'project-list', parent: sidebar });
     allProjects.forEach(project => {
         const listItem = newElement({ type: 'li', parent: list });
@@ -25,7 +25,8 @@ export function renderProjects() {
         });
         newElement({ type: 'span', text: project.name, parent: listItem });
     });
-    const projects = newElement({ type: "div", class: "projects", parent: container });
+    const gridBuffer = newElement({ type: "div", class: "grid-buffer", parent: projectsFlex });
+    const projects = newElement({ type: "div", class: "projects", parent: gridBuffer });
     allProjects.forEach(project => {
         const projectID = `a-${project.name.replaceAll(" ", "-").toLowerCase()}`;
         const newProject = newElement({ type: "div", id: projectID, className: "project", parent: projects });
@@ -47,7 +48,7 @@ export function renderProjects() {
         newProject.innerHTML = "";
         const newProjectForm = newElement({ type: 'form', parent: newProject });
         const newProjectInput = newElement({ type: 'input', parent: newProjectForm, maxlength: "22" });
-        const newProjectButtons = newElement({type: 'div', parent: newProjectForm});
+        const newProjectButtons = newElement({ type: 'div', parent: newProjectForm });
         const newProjectSubmit = newElement({ type: 'button', text: 'Confirm', parent: newProjectButtons });
         newProjectSubmit.addEventListener("click", e => {
             e.preventDefault();
@@ -60,5 +61,7 @@ export function renderProjects() {
             renderProjects();
         })
     });
+    const footer = newElement({ type: 'div', class: 'footer', parent: gridBuffer });
+    footer.innerHTML = `<span>Website by <a href="https://github.com/naouuud?tab=repositories" target="_blank">Nour Aoude.</a></span>`;
     renderItems();
 }

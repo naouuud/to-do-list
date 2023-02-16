@@ -27,8 +27,9 @@ body {
 .projects-flex {
     display: flex;
     justify-content: flex-start;
-    padding: 160px 0;
+    padding-top: 160px;
     width: 100%;
+    min-height: 100vh;
 }
 
 .sidebar {
@@ -64,14 +65,20 @@ body {
     grid-column: 2 / 3;
 }
 
+.grid-buffer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .projects {
     display: grid;
     gap: 25px;
     grid-template-columns: 700px;
     grid-auto-flow: row;
-    justify-items: center;
+    justify-items: start;
     margin-right: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 160px;
 }
 
 .homepage .project {
@@ -210,10 +217,8 @@ body {
 }
 
 .item-edit {
-    display: grid;
-    justify-content: center;
-    padding-top: 180px;
-    margin-bottom: 100px;
+    padding-top: 160px;
+    margin-bottom: 160px;
 }
 
 .item-edit-form {
@@ -306,12 +311,19 @@ body {
     outline: -webkit-focus-ring-color auto 1px;
 }
 
-.footer {
-    display: flex;
-    justify-content: center;
+.footer a, .footer a:visited {
+    color: rgb(77, 77, 77);
+    text-decoration: underline;
 }
 
-.footer a, .footer a:visited {
-    color: black;
-    text-decoration: underline;
+.footer {
+    color:rgb(77, 77, 77);
+    width: 700px;
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+.item-edit .footer {
+    width: 600px;
+    text-align: center;
 }
