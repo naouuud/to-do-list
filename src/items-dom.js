@@ -7,10 +7,12 @@ import { format, parseISO, isPast, isToday, isTomorrow } from "date-fns";
 
 export function renderItems() {
     allProjects.forEach(project => {
-        document.querySelector(`#${project.name} .project-body .item-list`).innerHTML = "";
+        const projectID = project.name.replaceAll(" ", "-").toLowerCase();
+        document.querySelector(`#a-${projectID} .project-body .item-list`).innerHTML = "";
     })
     allItems.forEach(item => {
-        const li = newElement({ type: "li", parent: `#${item.project} .project-body .item-list` });
+        const projectID = item.project.replaceAll(" ", "-").toLowerCase();
+        const li = newElement({ type: "li", parent: `#a-${projectID} .project-body .item-list` });
         li.setAttribute("index", allItems.indexOf(item));
         const left = newElement({ type: 'div', class: "flex-left", parent: li });
         const right = newElement({ type: 'div', class: 'flex-right', parent: li });

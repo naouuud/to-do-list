@@ -2,14 +2,13 @@ import { allItems, allProjects } from "./arrays";
 import { newElement } from "./dom-creation";
 
 export function createProject(name) {
-    if (name != null) {
-        const newProject = { name };
-        if (allProjects.some(project => project.name == newProject.name)) {
-            alert("Project already exists. Please pick a new name.");
-            return
-        }
-        allProjects.push(newProject);
+    if (!/\S/.test(name)) name = "Untitled";
+    const newProject = { name };
+    if (allProjects.some(project => project.name == newProject.name)) {
+        alert("Project already exists. Please pick another name.");
+        return
     }
+    allProjects.push(newProject);
 }
 
 export function deleteProject(n) {

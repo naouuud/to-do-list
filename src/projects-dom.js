@@ -26,7 +26,8 @@ export function renderProjects() {
     });
     const projects = newElement({ type: "div", class: "projects", parent: container });
     allProjects.forEach(project => {
-        const newProject = newElement({ type: "div", id: `${project.name}`, className: "project", parent: projects });
+        const projectID = `a-${project.name.replaceAll(" ", "-").toLowerCase()}`;
+        const newProject = newElement({ type: "div", id: projectID, className: "project", parent: projects });
         newProject.setAttribute("index", allProjects.indexOf(project));
         const header = newElement({ type: "div", className: "project-header", parent: newProject });
         newElement({ type: "span", textContent: `${project.name}`, parent: header });
@@ -42,8 +43,21 @@ export function renderProjects() {
     const newProject = newElement({ type: "div", id: "new-project", className: "project", parent: ".projects" });
     const newProjectText = newElement({ type: 'span', text: "+ New Project", parent: newProject });
     newProjectText.addEventListener("click", () => {
-        createProject(prompt("Choose a name for your project:", "Untitled"));
-        renderProjects();
+        newProject.innerHTML = "";
+        const newProjectForm = newElement({ type: 'form', parent: newProject });
+        const newProjectInput = newElement({ type: 'input', parent: newProjectForm, placeholder: "Name your project", maxlength: "30" });
+        const newProjectButtons = newElement({type: 'div', parent: newProjectForm});
+        const newProjectSubmit = newElement({ type: 'button', text: 'Confirm', parent: newProjectButtons });
+        newProjectSubmit.addEventListener("click", e => {
+            e.preventDefault();
+            createProject(newProjectInput.value);
+            renderProjects();
+        })
+        const newProjectCancel = newElement({ type: 'button', text: "Cancel", parent: newProjectButtons });
+        newProjectCancel.addEventListener("click", e => {
+            e.preventDefault();
+            renderProjects();
+        })
     });
     renderItems();
 }
