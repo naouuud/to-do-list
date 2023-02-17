@@ -48,3 +48,24 @@ export function moveDown(index) {
     allProjects.splice(index, 1);
     storeProjects();
 }
+
+export function editProjectName(index, name) {
+    if (!/\S/.test(name)) name = "Untitled";
+    if (allProjects.some(project => project.name == name)) {
+        alert("Project already exists. Please pick another name.");
+        return
+    }
+    const oldName = allProjects[index].name;
+    allProjects[index].name = name;
+    storeProjects();
+    function changeLoop() {
+        for (let i = 0; i < allItems.length; i++) {
+            if (allItems[i].project == oldName) {
+                allItems[i].project = name;
+                changeLoop()
+            }
+        }
+    }
+    changeLoop();
+    storeItems();
+}

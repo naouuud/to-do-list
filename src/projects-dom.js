@@ -1,5 +1,5 @@
 import { allProjects, updateProjectsArray } from "./arrays";
-import { createProject, deleteProject, moveDown, moveUp } from "./project";
+import { createProject, deleteProject, editProjectName, moveDown, moveUp } from "./project";
 import { newElement } from "./dom-creation";
 import { renderItems } from "./items-dom";
 
@@ -25,6 +25,7 @@ export function renderProjects() {
         });
         newElement({ type: 'span', text: project.name, parent: listItem });
     });
+    if (!document.querySelector(`.sidebar ul li`)) newElement({ type: 'li', text: "(no projects)", parent: list });
     const gridBuffer = newElement({ type: "div", class: "grid-buffer", parent: projectsFlex });
     const projects = newElement({ type: "div", class: "projects", parent: gridBuffer });
     allProjects.forEach(project => {
@@ -32,13 +33,32 @@ export function renderProjects() {
         const newProject = newElement({ type: "div", id: projectID, className: "project", parent: projects });
         newProject.setAttribute("index", allProjects.indexOf(project));
         const header = newElement({ type: "div", className: "project-header", parent: newProject });
-        newElement({ type: "span", textContent: `${project.name}`, parent: header });
-        const deleteButton = newElement({ type: "div", parent: header });
+        const leftSide = newElement({ type: "span", textContent: `${project.name}`, parent: header });
+        const rightSide = newElement({ type: "div", parent: header });
+        const editButton = newElement({ type: 'img', src: "../src/images/progress-pencil.svg", alt: "edit icon", parent: rightSide });
+        editButton.addEventListener("click", () => {
+            header.innerHTML = "";
+            const newNameForm = newElement({ type: 'form', parent: header });
+            const newNameInput = newElement({ type: 'input', parent: newNameForm, maxlength: "22" });
+            const newNameButtons = newElement({ type: 'div', parent: newNameForm });
+            const newNameSubmit = newElement({ type: 'button', text: 'Confirm', parent: newNameButtons });
+            const newNameCancel = newElement({ type: 'button', text: "Cancel", parent: newNameButtons });
+            newNameSubmit.addEventListener("click", e => {
+                e.preventDefault();
+                editProjectName(allProjects.indexOf(project), newNameInput.value);
+                renderProjects();
+            });
+            newNameCancel.addEventListener("click", e => {
+                e.preventDefault();
+                renderProjects();
+            });
+        });
+        const deleteButton = newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parent: rightSide });
         deleteButton.addEventListener("click", () => {
             deleteProject(newProject.getAttribute("index"));
             renderProjects();
         });
-        newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parent: deleteButton });
+
         const body = newElement({ type: "div", className: "project-body", parent: newProject });
         newElement({ type: "ul", className: "item-list", parent: body });
     })
@@ -62,6 +82,6 @@ export function renderProjects() {
         })
     });
     const footer = newElement({ type: 'div', class: 'footer', parent: gridBuffer });
-    footer.innerHTML = `<span>Website by <a href="https://github.com/naouuud?tab=repositories" target="_blank">Nour Aoude.</a></span>`;
+    footer.innerHTML = `<span>Website by <a href="https://github.com/naouuud?tab=repositories" target="_blank">Nour Aoude</a>.</span>`;
     renderItems();
 }
