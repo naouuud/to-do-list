@@ -4,6 +4,10 @@ import { collectFormData } from "./item-form";
 import { displayProjects } from "./project";
 import { renderProjects } from "./projects-dom";
 import { createItem, editItem } from "./item";
+import sun from "./../src/images/sunny.png"
+import rain from "./../src/images/rainy.png"
+import flames from "./../src/images/flames.png"
+import closeCircle from './../src/images/close-circle-outline.svg';
 
 export function renderNewWindow(proj) {
     const homePage = document.querySelector(".homepage");
@@ -19,7 +23,7 @@ export function renderNewWindow(proj) {
     newElement({ type: 'label', for: 'description', text: 'Description', parent: description });
     const descriptionInput = newElement({ type: "textarea", id: 'description', placeholder: 'Add a description', maxlength: '300', parent: description });
     const cancel = newElement({ type: 'div', class: 'item-cancel', parent: form });
-    const cancelIcon = newElement({ type: 'img', src: './../src/images/close-circle-outline.svg', alt: 'Close icon', parent: cancel });
+    const cancelIcon = newElement({ type: 'img', src: closeCircle, alt: 'close icon', parent: cancel });
     cancelIcon.addEventListener("click", renderProjects);
     const priority = newElement({ type: 'div', class: 'label-input-pair priority', parent: form });
     newElement({ type: 'label', text: 'Priority', for: 'priority', parent: priority });
@@ -27,9 +31,9 @@ export function renderNewWindow(proj) {
     const prioritySlider = newElement({ type: 'input', min: '1', max: '3', value: '2', class: 'slider', id: 'priority', parent: priorityBundle });
     prioritySlider.setAttribute('type', 'range');
     const sliderLabel = newElement({type: 'div', class: 'slider-label', parent: priorityBundle});
-    newElement({type: 'img', src: './../src/images/sunny.png', alt: 'Number one', parent: sliderLabel});
-    newElement({type: 'img', src: './../src/images/rainy.png', alt: 'Number two', parent: sliderLabel});
-    newElement({type: 'img', src: './../src/images/flames.png', alt: 'Number three', parent: sliderLabel});
+    newElement({type: 'img', src: sun, alt: 'sun', parent: sliderLabel});
+    newElement({type: 'img', src: rain, alt: 'rain', parent: sliderLabel});
+    newElement({type: 'img', src: flames, alt: 'flames', parent: sliderLabel});
     const due = newElement({ type: 'div', class: 'label-input-pair due', parent: form });
     newElement({ type: 'label', for: "due-date", text: "Due date", parent: due });
     const dueCalendar = newElement({ type: 'input', id: 'due-date', parent: due });

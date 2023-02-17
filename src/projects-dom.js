@@ -2,6 +2,9 @@ import { allProjects, updateProjectsArray } from "./arrays";
 import { createProject, deleteProject, editProjectName, moveDown, moveUp } from "./project";
 import { newElement } from "./dom-creation";
 import { renderItems } from "./items-dom";
+import pencil from "./../src/images/progress-pencil.svg";
+import bin from "./../src/images/delete-icon.svg";
+import triangle from "./../src/images/triangle.svg";
 
 export function renderProjects() {
     updateProjectsArray();
@@ -13,12 +16,12 @@ export function renderProjects() {
     const list = newElement({ type: 'ul', class: 'project-list', parent: sidebar });
     allProjects.forEach(project => {
         const listItem = newElement({ type: 'li', parent: list });
-        const upArrow = newElement({ type: 'img', src: './../src/images/triangle.svg', parent: listItem });
+        const upArrow = newElement({ type: 'img', src: triangle, parent: listItem });
         upArrow.addEventListener("click", () => {
             moveUp(allProjects.indexOf(project));
             renderProjects();
         });
-        const downArrow = newElement({ type: 'img', src: './../src/images/triangle.svg', parent: listItem });
+        const downArrow = newElement({ type: 'img', src: triangle, parent: listItem });
         downArrow.addEventListener("click", () => {
             moveDown(allProjects.indexOf(project));
             renderProjects();
@@ -34,7 +37,7 @@ export function renderProjects() {
         const header = newElement({ type: "div", className: "project-header", parent: newProject });
         const leftSide = newElement({ type: "span", textContent: `${project.name}`, parent: header });
         const rightSide = newElement({ type: "div", parent: header });
-        const editButton = newElement({ type: 'img', src: "../src/images/progress-pencil.svg", alt: "edit icon", parent: rightSide });
+        const editButton = newElement({ type: 'img', src: pencil, alt: "edit icon", parent: rightSide });
         editButton.addEventListener("click", () => {
             header.innerHTML = "";
             const newNameForm = newElement({ type: 'form', parent: header });
@@ -52,7 +55,7 @@ export function renderProjects() {
                 renderProjects();
             });
         });
-        const deleteButton = newElement({ type: "img", src: "../src/images/delete-icon.svg", alt: "garbage bin", parent: rightSide });
+        const deleteButton = newElement({ type: "img", src: bin, alt: "garbage bin", parent: rightSide });
         deleteButton.addEventListener("click", () => {
             deleteProject(newProject.getAttribute("index"));
             renderProjects();
