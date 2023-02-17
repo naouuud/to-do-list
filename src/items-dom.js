@@ -6,14 +6,10 @@ import { renderNewWindow, renderEditWindow } from "./edit-dom";
 import { format, parseISO, isPast, isToday, isTomorrow } from "date-fns";
 
 export function renderItems() {
-    allProjects.forEach(project => {
-        const projectID = project.name.replaceAll(" ", "-").toLowerCase();
-        document.querySelector(`#a-${projectID} .project-body .item-list`).innerHTML = "";
-    });
     updateItemsArray();
     allItems.forEach(item => {
-        const projectID = item.project.replaceAll(" ", "-").toLowerCase();
-        const li = newElement({ type: "li", parent: `#a-${projectID} .project-body .item-list` });
+        const projectIndex = allProjects.findIndex(project => project.name == item.project);
+        const li = newElement({ type: "li", parent: `.project[index="${projectIndex}"] .project-body .item-list` });
         li.setAttribute("index", allItems.indexOf(item));
         const left = newElement({ type: 'div', class: "flex-left", parent: li });
         const right = newElement({ type: 'div', class: 'flex-right', parent: li });

@@ -4,7 +4,7 @@ import { newElement } from "./dom-creation";
 export function createProject(name) {
     if (!/\S/.test(name)) name = "Untitled";
     const newProject = { name };
-    if (allProjects.some(project => project.name == newProject.name)) {
+    if (allProjects.some(project => project.name.toLowerCase() == newProject.name.toLowerCase())) {
         alert("Project already exists. Please pick another name.");
         return
     }
@@ -51,7 +51,7 @@ export function moveDown(index) {
 
 export function editProjectName(index, name) {
     if (!/\S/.test(name)) name = "Untitled";
-    if (allProjects.some(project => project.name == name)) {
+    if (allProjects.some(project => project.name.toLowerCase() == name.toLowerCase())) {
         alert("Project already exists. Please pick another name.");
         return
     }

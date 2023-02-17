@@ -29,8 +29,7 @@ export function renderProjects() {
     const gridBuffer = newElement({ type: "div", class: "grid-buffer", parent: projectsFlex });
     const projects = newElement({ type: "div", class: "projects", parent: gridBuffer });
     allProjects.forEach(project => {
-        const projectID = `a-${project.name.replaceAll(" ", "-").toLowerCase()}`;
-        const newProject = newElement({ type: "div", id: projectID, className: "project", parent: projects });
+        const newProject = newElement({ type: "div", className: "project", parent: projects });
         newProject.setAttribute("index", allProjects.indexOf(project));
         const header = newElement({ type: "div", className: "project-header", parent: newProject });
         const leftSide = newElement({ type: "span", textContent: `${project.name}`, parent: header });
